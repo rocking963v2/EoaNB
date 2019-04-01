@@ -696,6 +696,8 @@ focus_tree = {
 		    
 	    }
 		
+        mutually_exclusive = { focus = AUS_Discard_February_Patent }
+		
 		completion_reward = {
 		AUS = {
                add_to_variable = {
@@ -729,6 +731,8 @@ focus_tree = {
 		
 		available = {
 	    }
+		
+		mutually_exclusive = { focus = AUS_Keep_February_Patent }
 		
 		completion_reward = { 
 		    AUS = {
@@ -1083,6 +1087,7 @@ focus_tree = {
 		
 		completion_reward = {
             custom_effect_tooltip = AUS_tt_centralized_constitutional_monarchy 
+			set_country_flag = AUS_flag_centralised_constitutional_monarchy 
 	    } 
     }
 	
@@ -1103,6 +1108,7 @@ focus_tree = {
 		
 		completion_reward = {
             custom_effect_tooltip = AUS_tt_not_reform_empire
+			set_country_flag = AUS_flag_absolutist_german_empire
 		}
 	}
    

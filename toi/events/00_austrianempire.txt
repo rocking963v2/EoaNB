@@ -899,7 +899,7 @@ country_event = { #The Blue Danube Waltz
 	id = AUSflavour.1 
 	title = AUSflavour.1.t
 	desc = AUSflavour.1.d
-	picture = GFX_report_event_AUS_wien_1
+	picture = GFX_report_event_AUS_danube_1
 	
 	fire_only_once = yes 
 	
@@ -926,7 +926,7 @@ country_event = { #A German Requiem (Brahms)
 	
 	trigger = {
 	    TAG = AUS
-		date > 1868.07.24        
+		date > 1867.12.01        
 	}
 	
 	option = { 
@@ -941,7 +941,7 @@ country_event = { #Vienna Court Opera Opens
 	id = AUSflavour.3 
 	title = AUSflavour.3.t
 	desc = AUSflavour.3.d
-	picture = GFX_report_event_AUS_wien_1
+	picture = GFX_report_event_AUS_wien_opera
 	
 	fire_only_once = yes 
 	
@@ -1569,7 +1569,7 @@ country_event = { #Choose Between Federalization or Dual Monarchy
 	option = { #Federalization  
 		name = AUSfedcompromise.1.b  
 		ai_chance = { 
-            factor = 40    
+            factor = 40      
             modifier = {
                 factor = 0     
                 is_historical_focus_on = yes
@@ -1692,6 +1692,8 @@ country_event = { #Franz Joseph crowned King of Hungary
                     expire = 1920.08.03
                     ideology = despotism 
                 }
+	            set_country_flag = AUS_flag_hun_dual_monarchy  		
+			    load_focus_tree = aus-hun_focus_1
 				remove_ideas = AUS_Franz_Joseph_I
 				set_variable = {
                     var = HUN_REVOLT_RISK
@@ -1716,10 +1718,7 @@ country_event = { #Franz Joseph crowned King of Hungary
 	option = { #Sehr Schon    
 		name = AUShuncompromise.5.a  
 		ai_chance = { factor = 80 }
-		
-		hidden_effect = {
-	        set_country_flag = AUS_flag_hun_dual_monarchy  		
-		}
+
 		custom_effect_tooltip = AUS_tt_dual_monarchy_enacted    
     }	
 }

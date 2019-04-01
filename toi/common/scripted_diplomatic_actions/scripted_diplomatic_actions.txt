@@ -487,26 +487,26 @@ scripted_diplomatic_actions = {
 
 		# SEND POPUP CUSTOMIZATION
 		# use diplomatic_action as context in scripted gui
-		 send_scripted_gui = call_allies_gui  
-		 reset_send_effect = { # if action has a send scripted gui, this effect will be used for clearing the state of gui (will run when player opens the scripted gui by sending the action or when ai proposes action
-			# # clear action
-			if = {
-				limit = { 
-					From = {
-						is_ai = no 
-					}
-				}
-				FROM = {
-                    set_temp_variable = { show_5 = 1 }
-                    subtract_from_temp_variable = { show_5 = show_enemies_button_2 }
-                    set_variable = { show_enemies_button_2 = show_5 }
-			    }
-			}
-		}
+		 # send_scripted_gui = call_allies_gui  
+		 # reset_send_effect = { # if action has a send scripted gui, this effect will be used for clearing the state of gui (will run when player opens the scripted gui by sending the action or when ai proposes action
+			# # # clear action
+			# if = {
+				# limit = { 
+					# From = {
+						# is_ai = no 
+					# }
+				# }
+				# FROM = {
+                    # set_temp_variable = { show_5 = 1 }
+                    # subtract_from_temp_variable = { show_5 = show_enemies_button_2 }
+                    # set_variable = { show_enemies_button_2 = show_5 }
+			    # }
+			# }
+		# }
 		can_be_sent = { # send button will be disabled if no
 			always = yes
 		}
-		send_description = W # if there is no scripted gui, this desc will be used in send yes/no pop up
+		send_description = "lol" # if there is no scripted gui, this desc will be used in send yes/no pop up
 
 
 		# RECEIVE POPUP CUSTOMIZATION
@@ -539,6 +539,9 @@ scripted_diplomatic_actions = {
 		# AI
 		# a list of ai_will_do entries that will be used to decide if AI should accept or reject a request
 		ai_acceptance = {
+		    Base = {
+		        base = 1 
+			}
 		}
 
 		# ai_will_do to decide if AI should send this action or not

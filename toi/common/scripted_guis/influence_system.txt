@@ -26,22 +26,35 @@ scripted_gui = {
 		window_name = "influence_power_info2"
 		parent_window_token = selected_country_view_diplomacy  
 		
-		visible = {
-		#is_ai = no  
-		    THIS = {
-			    is_ai = yes  						
-			}
+		visible = { 
+			NOT = {
+				check_variable = {  THIS.id = ROOT.id   }
+		    }  						
 		}
 		 
 		effects = {
 			influence_open_click = {
-			ROOT = {
                 set_temp_variable = { show = 1 }
                 subtract_from_temp_variable = { show = show_influence_actions }
                 set_variable = { show_influence_actions = show }
+				
+	        if = {
+	            limit = { 
+				    check_variable = { THIS.overall_score > 0 } 
+					check_variable = { ROOT.overall_score > 0 }
+				}
+		        set_variable = { pp_scaling_influence = THIS.overall_score }
+	    	    divide_variable = { pp_scaling_influence = ROOT.overall_score }
+	        }
+			else = {
+			    set_variable = { pp_scaling_influence = 1 }
 			}
+				set_variable = { political_power_spend_add_5_influence = 100  }
+				multiply_variable = { political_power_spend_add_5_influence = pp_scaling_influence }
+				set_variable = { political_power_spend_add_5_influence_positive = political_power_spend_add_5_influence }
+				multiply_variable = { political_power_spend_add_5_influence = -1 }
 			}
-		    show_influencers_button_click = {
+		    show_influencers_button_click = { 
 			ROOT = {
                 set_temp_variable = { show_1 = 1 }
                 subtract_from_temp_variable = { show_1 = show_influencers }
@@ -111,15 +124,10 @@ scripted_gui = {
 		parent_window_token = selected_country_view_diplomacy  
 		
 		visible = {
-		    ROOT = {
 			    check_variable = {
 			        show_influence_actions > 0 
 			    }  			
-		    }
-		    THIS = {
-			    is_ai = yes
-			}
-		} 
+		}
 		 
 		effects = {
 		    add_influence_button_click = {
@@ -154,10 +162,54 @@ scripted_gui = {
                    	    max = 1 
 	                 	min = 0 
 	                }					
+                    for_loop_effect = {
+                        start = 0
+                        end = length_temp
+                        add = 1
+                        value = v
+                        break = b
+                        find_highest_in_array = {
+                        array = influencer_array
+                        value = influencer_array_highest_value
+                        index = influencer_array_highest_index
+                        }
+                        remove_from_array = {
+                            array = influencer_array
+                            index = influencer_array_highest_index
+                        }
+                        add_to_temp_array = { 
+                            array = influencer_array_temp 
+                            value = influencer_array_highest_value 
+                        }
+                        set_temp_variable = { tag_temp = influencer_tag_array^influencer_array_highest_index }
+                        remove_from_array = {
+                            array = influencer_tag_array
+                            index = influencer_array_highest_index
+                        }
+                        add_to_temp_array = { 
+                            array = influencer_tag_array_temp  
+                            value = tag_temp
+                        }
+                    }
+                    for_loop_effect = {
+                        start = 0
+                        end = length_temp
+                        add = 1
+                        value = v
+                        break = b
+                        add_to_array = { 
+                            array = influencer_array
+                            value = influencer_array_temp^v 
+                        }
+                        add_to_array = { 
+                            array = influencer_tag_array
+                            value = influencer_tag_array_temp^v 
+						}
+					}
+                }
+				ROOT = {
+				add_political_power = PREV.political_power_spend_add_5_influence
 				}
-				ROOT = { 
-				    subtract_from_variable = { influence_var = 0.05 }
-			    }
 			}
 		    reset_influence_button_click = {
 			    THIS = {
@@ -171,29 +223,39 @@ scripted_gui = {
 				    add_to_variable = { influence_var = 0.05 }
 				}
 			}
+            make_sphere_button_click = {
+			    ROOT = {
+				    
+				}
+				THIS = {
+					set_variable = { influencer_status = 3 }
+				}
+			}
 		}
 		
 		triggers = {
 		    add_influence_button_click_enabled  = {
-			   ROOT = { 
-				    check_variable = { influence_var > 0.05 } 
-				}
+				check_variable = { ROOT.political_power > political_power_spend_add_5_influence_positive } 
 				OR = {
                     NOT = {
-                        check_variable = { 
-			                var = this.score_array_position_var
-                            value = 8		
-		                    compare = less_than_or_equals 
-			            }	
-				    }
-                    AND = {					
-                        check_variable = { root.score_array_position_var >  8 }						
-				        NOT = {		
+					    THIS = {
                             check_variable = { 
-		                   	    var = this.score_array_position_var
-                                value = 16 		
-		                   	    compare = less_than_or_equals 
-			                }					
+			                    var = score_array_position_var
+                                value = 8		
+		                        compare = less_than_or_equals 
+			                }	
+				        }
+					}
+                    AND = {					
+                        check_variable = { Root.score_array_position_var >  8 }						
+				        NOT = { 
+                            THIS = {						
+                                check_variable = { 
+		                     	    var = score_array_position_var
+                                    value = 16 		
+		                   	        compare = less_than_or_equals 
+			                    }
+                            }							
 				        }			
 				    }
 				}
@@ -201,9 +263,87 @@ scripted_gui = {
 			        check_variable = { influencer_array^i < 6 }
 				}					
 			}
+            make_sphere_button_click_enabled = {
+			    check_variable = { This.influencer_var@ROOT > 0.70 } 
+				NOT = {
+					check_variable = { THIS.influencer_status = 3 }
+				}
+			}
 	    }
 
 		ai_weights = {
 		}
     }
+	
+	allies_info = {
+		context_type = selected_country_context
+		
+		window_name = "show_allies"
+		parent_window_token = selected_country_view_diplomacy 
+		
+		visible = {
+		THIS = {
+			check_variable = {
+			    allies_array^v > 0 
+			}  			
+		}
+		}
+		 
+		effects = {			
+		}
+		
+		dynamic_lists = {
+			show_grid = {
+				array = allies_array
+				entry_container = show_entry_3
+			} 
+		}
+		properties = {
+			flag = { image = "[?This.allies_array^i.GetFlag]" } 
+		}
+		
+		triggers = {
+		}
+
+		ai_weights = {
+		}
+	}
+	
+	call_allies_gui = {
+
+		window_name = "call_allies" 
+		
+		visible = {
+		    FROM = {
+		        check_variable = { show_enemies_button_2 > 0 }
+			}
+		}
+		  
+		effects = {	
+            enemies_button1_click = {
+			    ROOT = {
+                    set_temp_variable = { show_4 = 2 }
+                    subtract_from_temp_variable = { show_4 = show_enemies_button_1^i }
+                    set_variable = { show_enemies_button_1^i = show_4 }
+			    }
+			}
+		}
+		
+		dynamic_lists = {
+			show_grid = {
+				array = Root.enemies
+				entry_container = show_entry_4 
+			} 
+		}
+		properties = {
+			flag = { image = "[?Root.enemies^i.GetFlag]" } 
+			enemies_button1 = { frame = show_enemies_button_1^i }
+		}
+		
+		triggers = {
+		}
+
+		ai_weights = {
+		}
+	}
 }

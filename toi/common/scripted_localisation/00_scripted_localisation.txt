@@ -218,7 +218,7 @@ defined_text = {
 		trigger = {
 		THIS = {
             check_variable = { 
-			    influencer_array^0 > 0.50 
+			    influencer_status = 3 
 			}			
 		}
 		} 
@@ -226,5 +226,20 @@ defined_text = {
 	}
 	text = {
 	    localization_key = "Independent Nation"
+	}
+}
+
+defined_text = {
+	name = get_icon_name_texture
+	text = {
+		trigger = {
+            check_variable = { 
+			    show_enemies_button_1 > 0       
+			}			
+		}
+		localization_key = "GFX_sort_button_202x29_3_frames:2" 
+	}
+	text = {
+	    localization_key = "GFX_sort_button_202x29_3_frames:1"
 	}
 }

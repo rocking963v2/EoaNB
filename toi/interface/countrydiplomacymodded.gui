@@ -1,0 +1,229 @@
+guiTypes = {	
+
+	containerWindowType = {
+		name = "rival_country_gui"
+		position = { x = 310 y = 435 }
+		size = { width = 100%% height = 100%% }   
+        moveable = no  		 
+		clipping = no
+		
+		iconType = { 
+			name = "box"
+			quadTextureSprite = "GFX_generic_bg" 
+			scale = 0.55   
+			position = { x = 45 y = 2.5 }    
+			Orientation = "UPPER_LEFT"
+		}
+	    instantTextboxType = { 
+		    name = "rival_name"
+		    position = { x = 16 y = 5 }
+		    font = "hoi_18mbs"
+		    text = "[?This.rival_country.GetName]"
+		    #maxWidth = 250 
+		    #maxHeight = 26              
+		    format = center
+	    }
+		iconType = { 
+			name = "flag"
+			quadTextureSprite = "GFX_flag_small2" 
+			position = { x = 0 y = 0 }    
+			Orientation = "UPPER_LEFT"
+			pdx_tooltip = "TOOLTIP_GET_NAME_FLAG2"
+		}
+		iconType = {
+			name = "flag_frame"
+			quadTextureSprite = "GFX_small_flag_frame_thin"
+			position = { x = -3 y = 0 } 
+			Orientation = "UPPER_LEFT"
+			pdx_tooltip = "TOOLTIP_GET_NAME_FLAG2" 
+		}  	
+    }	
+	
+	containerWindowType = {
+		name = "favoured_country_gui"
+		position = { x = 310 y = 435 }
+		size = { width = 100%% height = 100%% }   
+        moveable = no  		 
+		clipping = no
+		
+		iconType = { 
+			name = "box2"
+			quadTextureSprite = "GFX_generic_bg" 
+			scale = 0.55   
+			position = { x = 45 y = 37.5 }    
+			Orientation = "UPPER_LEFT"
+		}
+	    instantTextboxType = { 
+		    name = "most_favoured_name"
+		    position = { x = 45 y = 40 }
+		    font = "hoi_18mbs"
+		    text = "[?This.most_favoured_country.GetName]"
+		    maxWidth = 150 
+		    maxHeight = 14              
+		    format = center 
+			fixedsize = yes 
+	    }
+		iconType = { 
+			name = "flag2"
+			quadTextureSprite = "GFX_flag_small2" 
+			position = { x = 0 y = 35 }    
+			Orientation = "UPPER_LEFT"
+			pdx_tooltip = "TOOLTIP_GET_NAME_FLAG2"
+		}
+		iconType = {
+			name = "flag_frame2"
+			quadTextureSprite = "GFX_small_flag_frame_thin"
+			position = { x = -3 y = 35 } 
+			Orientation = "UPPER_LEFT"
+			pdx_tooltip = "TOOLTIP_GET_NAME_FLAG2" 
+		}
+    }	
+	
+	containerWindowType = {
+		name = "justify_wargoal"   
+		position = { x = 0 y = 15 }
+        size = { width= 200 height= 380 }
+		clipping = no  
+		#moveable = yes 
+		margin = { top = 0 bottom = 0 left = 0 right = 0 }
+		
+	    instantTextboxType = { 
+		    name = "war_goal_selected"
+	     	position = { x = 40 y = 25 }
+	    	font = "hoi_18mbs"
+	    	text = "No Wargoal selected"
+	    	maxWidth = 500   
+	    	#maxHeight = 26              
+	    	format = center 
+	    }
+	    instantTextboxType = { 
+		    name = "war_goal_selected2"
+	     	position = { x = 40 y = 50 }
+	    	font = "hoi_18mbs"
+	    	text = "Select a War Goal type"
+	    	maxWidth = 500   
+	    	#maxHeight = 26              
+	    	format = center 
+	    }
+		
+		containerWindowType = {
+			name = "show_war_goals"
+			#verticalScrollbar = "right_vertical_slider"
+			position = { x = 25 y = 130 } 
+			size = { width= 250 height= 240 } 
+			margin = { top = 15 bottom = 15 left = 0 right = 0 } 
+			smooth_scrolling = yes
+			scroll_wheel_factor = 40
+			vertical_scroll_step = 40
+			clipping = no  
+			
+	            background = {
+		            name = "Background"		
+		        	spriteType ="GFX_tiled_paper_w_frame_one_border"
+		        }
+			
+			gridboxtype = {
+				name = "show_grid1"
+				position = { x = 0 y = 0 }
+				size = { width = 100%% height = 250 }
+				slotsize = { width = 100%% height = 35 }
+				add_horizontal = no 				
+				format = "UPPER_LEFT"
+				max_slots_horizontal = 1       
+			}
+
+	        containerWindowType = {
+	         	name = "show_entry_war_goals"   
+	            clipping = no  
+		        #moveable = yes 
+
+	        	buttonType = {
+	            	name = "war_goal_button"
+	            	position = { x = 20 y = 0 }
+	               	quadTextureSprite = "GFX_sort_button_202x29_3_frames" 
+	            	clicksound = click_close
+	            	oversound = ui_menu_over 
+	            	pdx_tooltip = "1"			
+		        	buttonText = "[?wargoals_array^i.GetWarGoalType]"
+			        buttonFont = "hoi_18mbs"
+		      }  
+            }				
+		}
+
+		containerWindowType = {
+			name = "show_war_goals_states"
+			#verticalScrollbar = "right_vertical_slider"
+			position = { x = 275 y = 130 } 
+			size = { width= 250 height= 240 } 
+			margin = { top = 0 bottom = 0 left = 0 right = 0 } 
+			smooth_scrolling = yes
+			scroll_wheel_factor = 40
+			vertical_scroll_step = 40
+			clipping = no  
+			
+	    background = {
+		    name = "Background"		
+			spriteType ="GFX_tiled_paper_w_frame_one_border"
+		}
+			
+			gridboxtype = {
+				name = "show_grid2"
+				position = { x = 0 y = 0 }
+				size = { width = 100%% height = 250 }
+				slotsize = { width = 100%% height = 35 }
+				add_horizontal = no 				
+				format = "UPPER_LEFT"
+				max_slots_horizontal = 1       
+			} 
+		}		
+    } 
+	
+	containerWindowType = {
+		name = "topbar_tension_modded"
+		position = { x=-4 y=-1 }
+		size = { width=100%% height=100%% }
+	
+		buttonType ={
+			name ="threat_button2"
+			spriteType = "GFX_world_tension_icon_big_strip"
+			position = { x=-96 y=20 }
+			Orientation = "UPPER_RIGHT"
+			clicksound = click_default
+			pdx_tooltip = "AGGRESSIVE_EXPANSION_TOOLTIP"
+		}
+
+		iconType ={
+			name ="threat_icon_glow2"
+			spriteType = "GFX_WT_anim_strip"
+			position = { x=-111 y=5 }
+			Orientation = "UPPER_RIGHT"
+			alwaystransparent = yes
+			pdx_tooltip = "AGGRESSIVE_EXPANSION_TOOLTIP"
+		}
+
+		buttonType ={
+			name ="threat_value_button2"
+			spriteType = "GFX_world_tension_icon_big_strip"
+			position = { x=-98 y=74 }
+			Orientation = "UPPER_RIGHT"
+			clicksound = click_default
+			size = { x=50 y=20 }
+			quadTextureSprite ="GFX_tiled_window_transparent"
+			pdx_tooltip = "AGGRESSIVE_EXPANSION_TOOLTIP"
+		}
+
+		instantTextBoxType = {
+			name ="threat_value2"
+			position = { x=-98 y=74 }
+			font = "hoi_18mbs"
+			text = "[?Root.aggressive_expansion]"
+			format = center
+			maxWidth = 55
+			maxHeight = 24
+			fixedsize = yes
+			Orientation = "UPPER_RIGHT"
+			alwaystransparent = yes
+			pdx_tooltip = "AGGRESSIVE_EXPANSION_TOOLTIP"
+		} 
+	}
+}

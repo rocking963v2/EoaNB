@@ -198,6 +198,14 @@ ideas = {
 		}
 	}
 	country = {
+		TSH_nagasaki_iron_foundry = {
+
+			modifier = {
+				local_resources_factor = 0.05
+			}
+		}
+	}
+	country = {
 		TSH_yokosuka_arsenal = {
 
 			modifier = {
@@ -218,6 +226,14 @@ ideas = {
 
 			modifier = {
 				production_speed_naval_base_factor = 0.15
+			}
+		}
+	}
+	country = {
+		TSH_yokosuka_iron_foundry = {
+
+			modifier = {
+				local_resources_factor = 0.05
 			}
 		}
 	}

@@ -466,6 +466,7 @@ eoanb_score_system_calc = {
             set_variable = { score_array_position_var_pop = score_array_position_var }
             add_to_variable = { score_array_position_var = 1 } 
         }
+		eoanb_ledger_system_calc = yes
 }
 
 eoanb_ledger_system_calc = {
